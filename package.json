@@ -1,0 +1,11 @@
+{
+  "name": "ai-debate-fullstack",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npx concurrently \"npm start --prefix backend\" \"npm start --prefix frontend/ai-debate-frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
