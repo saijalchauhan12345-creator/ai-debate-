@@ -6,6 +6,10 @@ frontend/ai-debate-frontend/node_modules/
 # Environment files (contains keys and credentials)
 .env
 backend/.env
+frontend/ai-debate-frontend/.env
+
+# Nested git metadata from embedded repos
+frontend/ai-debate-frontend/.git
 
 # Production build directories
 frontend/ai-debate-frontend/build/
