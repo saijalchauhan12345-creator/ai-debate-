@@ -70,6 +70,17 @@ function Navbar() {
         <span />
       </button>
 
+      <div className="navbar-utility">
+        <button
+          type="button"
+          className="theme-button"
+          title={`Switch to ${theme === "dark" ? "Light" : "Dark"} Mode`}
+          onClick={toggleTheme}
+        >
+          {theme === "dark" ? "☀️" : "🌙"}
+        </button>
+      </div>
+
       <div className={`navbar-menu ${menuOpen ? "open" : ""}`}>
         <div className="navbar-links">
           <button
@@ -105,15 +116,6 @@ function Navbar() {
         </div>
 
         <div className="navbar-actions">
-          <button
-            type="button"
-            className="theme-button"
-            title={`Switch to ${theme === "dark" ? "Light" : "Dark"} Mode`}
-            onClick={toggleTheme}
-          >
-            {theme === "dark" ? "☀️" : "🌙"}
-          </button>
-
           {user ? (
             <div className="user-section">
               <span className="user-welcome">
