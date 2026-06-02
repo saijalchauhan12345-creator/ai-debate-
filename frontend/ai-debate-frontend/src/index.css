@@ -1,0 +1,123 @@
+/* Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  --text-color: #ffffff;
+  --card-bg: rgba(124, 58, 237, 0.12);
+  --card-border: rgba(124, 58, 237, 0.4);
+  --card-shadow: rgba(124, 58, 237, 0.2);
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --input-border: rgba(124, 58, 237, 0.2);
+  --input-text: #ffffff;
+  --primary-color: #7c3aed;
+  --secondary-color: #a78bfa;
+  --muted-text: #c4b5fd;
+  --nav-bg: rgba(15, 12, 41, 0.75);
+  --nav-border: rgba(124, 58, 237, 0.4);
+  --active-link: #a78bfa;
+  --orb-opacity: 0.3;
+  --scrollbar-track: #0f0c29;
+  --scrollbar-thumb: #7c3aed;
+}
+
+[data-theme="light"] {
+  --bg-gradient: linear-gradient(135deg, #f5f3ff, #e9d5ff, #ddd6fe);
+  --text-color: #1e1b4b;
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --card-border: rgba(124, 58, 237, 0.25);
+  --card-shadow: rgba(124, 58, 237, 0.08);
+  --input-bg: rgba(255, 255, 255, 0.95);
+  --input-border: rgba(124, 58, 237, 0.3);
+  --input-text: #1e1b4b;
+  --primary-color: #6d28d9;
+  --secondary-color: #7c3aed;
+  --muted-text: #5b21b6;
+  --nav-bg: rgba(245, 243, 255, 0.85);
+  --nav-border: rgba(124, 58, 237, 0.25);
+  --active-link: #6d28d9;
+  --orb-opacity: 0.15;
+  --scrollbar-track: #f5f3ff;
+  --scrollbar-thumb: #6d28d9;
+}
+
+/* Transitions for smooth theme switching */
+body, nav, div, p, h1, h2, h3, button, input, textarea, span, label, select {
+  transition: background 0.4s ease, background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease, transform 0.2s ease !important;
+}
+
+/* Base */
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-color);
+  min-height: 100vh;
+}
+
+/* Layout container */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Headings */
+.heading {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/* Subtext */
+.subtext {
+  color: var(--muted-text);
+  font-size: 1rem;
+}
+
+/* Button (clean) */
+.btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 14px var(--card-shadow);
+}
+
+.btn:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+/* Card */
+.card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 4px 20px var(--card-shadow);
+}
+
+.card:hover {
+  border-color: var(--primary-color);
+}
+
+/* Input */
+.input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--input-border);
+  background-color: var(--input-bg);
+  color: var(--input-text);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
