@@ -79,9 +79,8 @@ function Debate() {
   return (
     <div style={{
       minHeight: "100vh",
-      background: "var(--bg-gradient)",
-      color: "var(--text-color)",
-      fontFamily: "sans-serif"
+      background: "linear-gradient(135deg, #0f0c29, #302b63, #24243e)",
+      color: "white", fontFamily: "sans-serif"
     }}>
 
       <style>{`
@@ -92,13 +91,13 @@ function Debate() {
         .glass-float-panel {
           animation: floatCard 6s ease-in-out infinite;
           backdrop-filter: blur(15px);
-          background: var(--card-bg) !important;
-          border: 1px solid var(--card-border) !important;
-          box-shadow: 0 20px 50px var(--card-shadow) !important;
+          background: rgba(124, 58, 237, 0.08) !important;
+          border: 1px solid rgba(124, 58, 237, 0.3) !important;
+          box-shadow: 0 20px 50px rgba(124, 58, 237, 0.2) !important;
           transition: all 0.3s ease;
         }
         .glass-float-panel:hover {
-          box-shadow: 0 25px 60px var(--card-shadow) !important;
+          box-shadow: 0 25px 60px rgba(124, 58, 237, 0.35) !important;
         }
       `}</style>
 
@@ -106,8 +105,7 @@ function Debate() {
       {[...Array(5)].map((_, i) => (
         <div key={i} style={{
           position: "fixed", borderRadius: "50%",
-          background: `radial-gradient(circle, var(--primary-color), transparent)`,
-          opacity: "var(--orb-opacity)",
+          background: `radial-gradient(circle, #7c3aed33, transparent)`,
           width: `${60 + i * 30}px`, height: `${60 + i * 30}px`,
           top: `${10 + i * 18}%`,
           left: i % 2 === 0 ? `${2 + i * 3}%` : `${80 + i * 3}%`,
@@ -121,18 +119,17 @@ function Debate() {
         {/* Header */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "30px" }}>
           <div>
-            <h1 style={{ fontSize: "32px", fontWeight: "900", textShadow: "0 0 20px var(--primary-color)" }}>
-              ⚡ Debate <span style={{ color: "var(--secondary-color)" }}>Arena</span>
+            <h1 style={{ fontSize: "32px", fontWeight: "900", textShadow: "0 0 20px #7c3aed" }}>
+              ⚡ Debate <span style={{ color: "#a78bfa" }}>Arena</span>
             </h1>
-            <p style={{ color: "var(--muted-text)", fontSize: "14px", fontWeight: "600" }}>Welcome, {user?.name}!</p>
+            <p style={{ color: "#a78bfa", fontSize: "14px" }}>Welcome, {user?.name}!</p>
           </div>
           <button
             onClick={() => setShowHistory(!showHistory)}
             style={{
-              background: "var(--card-bg)", color: "var(--secondary-color)",
-              border: "1px solid var(--primary-color)", padding: "10px 20px",
-              borderRadius: "20px", cursor: "pointer", fontWeight: "bold",
-              boxShadow: "0 4px 10px var(--card-shadow)"
+              background: "rgba(124,58,237,0.2)", color: "#a78bfa",
+              border: "1px solid #7c3aed", padding: "10px 20px",
+              borderRadius: "20px", cursor: "pointer", fontWeight: "bold"
             }}>
             📜 History ({history.length})
           </button>
@@ -141,29 +138,27 @@ function Debate() {
         {/* History Panel */}
         {showHistory && (
           <div style={{
-            background: "var(--card-bg)", border: "1px solid var(--card-border)",
+            background: "rgba(124,58,237,0.1)", border: "1px solid #7c3aed44",
             borderRadius: "16px", padding: "20px", marginBottom: "24px",
-            animation: "slideIn 0.4s ease",
-            boxShadow: "0 10px 25px var(--card-shadow)"
+            animation: "slideIn 0.4s ease"
           }}>
-            <h3 style={{ color: "var(--secondary-color)", marginBottom: "16px", fontWeight: "bold" }}>📜 Debate History</h3>
+            <h3 style={{ color: "#a78bfa", marginBottom: "16px" }}>📜 Debate History</h3>
             {history.length === 0 ? (
-              <p style={{ color: "var(--muted-text)" }}>No debates yet!</p>
+              <p style={{ color: "#7c5aaa" }}>No debates yet!</p>
             ) : (
               history.map((d, i) => (
                 <div key={i} style={{
-                  background: "var(--card-bg)", borderRadius: "12px",
+                  background: "rgba(124,58,237,0.15)", borderRadius: "12px",
                   padding: "12px 16px", marginBottom: "10px",
-                  border: "1px solid var(--card-border)",
                   display: "flex", justifyContent: "space-between", alignItems: "center"
                 }}>
                   <div>
-                    <p style={{ fontWeight: "bold", marginBottom: "4px", color: "var(--text-color)" }}>{d.topic}</p>
-                    <p style={{ color: "var(--muted-text)", fontSize: "13px" }}>{new Date(d.createdAt).toLocaleDateString()}</p>
+                    <p style={{ fontWeight: "bold", marginBottom: "4px" }}>{d.topic}</p>
+                    <p style={{ color: "#7c5aaa", fontSize: "13px" }}>{new Date(d.createdAt).toLocaleDateString()}</p>
                   </div>
                   <div style={{ textAlign: "right" }}>
-                    <p style={{ color: "var(--secondary-color)", fontWeight: "bold" }}>Score: {d.score}</p>
-                    <p style={{ color: d.status === "completed" ? "#10b981" : "#ffaa00", fontSize: "12px", fontWeight: "bold" }}>{d.status}</p>
+                    <p style={{ color: "#a78bfa", fontWeight: "bold" }}>Score: {d.score}</p>
+                    <p style={{ color: d.status === "completed" ? "#00ff64" : "#ffaa00", fontSize: "12px" }}>{d.status}</p>
                   </div>
                 </div>
               ))
@@ -174,31 +169,23 @@ function Debate() {
         {/* Topic Input */}
         {!started && (
           <div style={{
-            background: "var(--card-bg)", border: "1px solid var(--card-border)",
+            background: "rgba(124,58,237,0.12)", border: "1px solid #7c3aed77",
             borderRadius: "24px", padding: "40px",
-            animation: "slideIn 0.6s ease",
-            boxShadow: "0 10px 30px var(--card-shadow)"
+            animation: "slideIn 0.6s ease"
           }}>
-            <h2 style={{ textAlign: "center", marginBottom: "24px", fontSize: "24px", color: "var(--text-color)", fontWeight: "900" }}>
-              Choose Your <span style={{ color: "var(--secondary-color)" }}>Debate Topic</span>
+            <h2 style={{ textAlign: "center", marginBottom: "24px", fontSize: "24px" }}>
+              Choose Your <span style={{ color: "#a78bfa" }}>Debate Topic</span>
             </h2>
 
             {/* Suggested Topics */}
             <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginBottom: "24px", justifyContent: "center" }}>
               {["AI will replace humans", "Social media is harmful", "Climate change is urgent", "Space exploration is worth it"].map((t, i) => (
-                <button 
-                  key={i} 
-                  onClick={() => setTopic(t)} 
-                  style={{
-                    background: topic === t ? "var(--primary-color)" : "var(--card-bg)",
-                    color: topic === t ? "white" : "var(--secondary-color)", 
-                    border: "1px solid var(--primary-color)",
-                    padding: "8px 16px", borderRadius: "20px",
-                    cursor: "pointer", fontSize: "13px", transition: "all 0.3s"
-                  }}
-                >
-                  {t}
-                </button>
+                <button key={i} onClick={() => setTopic(t)} style={{
+                  background: topic === t ? "#7c3aed" : "rgba(124,58,237,0.2)",
+                  color: "#a78bfa", border: "1px solid #7c3aed",
+                  padding: "8px 16px", borderRadius: "20px",
+                  cursor: "pointer", fontSize: "13px", transition: "all 0.3s"
+                }}>{t}</button>
               ))}
             </div>
 
@@ -208,9 +195,9 @@ function Debate() {
               onChange={e => setTopic(e.target.value)}
               style={{
                 width: "100%", padding: "14px 16px",
-                background: "var(--input-bg)",
-                border: "1px solid var(--input-border)", borderRadius: "12px",
-                color: "var(--input-text)", fontSize: "15px", boxSizing: "border-box",
+                background: "rgba(255,255,255,0.05)",
+                border: "1px solid #7c3aed44", borderRadius: "12px",
+                color: "white", fontSize: "15px", boxSizing: "border-box",
                 marginBottom: "20px"
               }}
             />
@@ -219,11 +206,11 @@ function Debate() {
               onClick={handleStart}
               disabled={loading || !topic.trim()}
               style={{
-                width: "100%", background: "linear-gradient(90deg, var(--primary-color), var(--secondary-color))",
+                width: "100%", background: "linear-gradient(90deg, #7c3aed, #9d5cf6)",
                 color: "white", border: "none", padding: "16px",
                 borderRadius: "30px", fontSize: "16px",
                 cursor: loading ? "not-allowed" : "pointer",
-                fontWeight: "bold", boxShadow: "0 0 30px var(--card-shadow)"
+                fontWeight: "bold", boxShadow: "0 0 30px #7c3aed88"
               }}>
               {loading ? "Starting... ⏳" : "Start Debate 🚀"}
             </button>
@@ -239,11 +226,11 @@ function Debate() {
             marginBottom: "24px"
           }}>
             <div style={{
-              background: "var(--card-bg)", border: "1px solid var(--card-border)",
+              background: "rgba(124,58,237,0.15)", border: "1px solid rgba(124, 58, 237, 0.3)",
               borderRadius: "16px", padding: "14px 20px", marginBottom: "20px",
               display: "flex", justifyContent: "space-between", alignItems: "center"
             }}>
-              <p style={{ color: "var(--muted-text)", margin: 0, fontSize: "15px" }}>Topic: <strong style={{ color: "var(--text-color)", fontSize: "16px" }}>{topic}</strong></p>
+              <p style={{ color: "#c4b5fd", margin: 0, fontSize: "15px" }}>Topic: <strong style={{ color: "white", fontSize: "16px" }}>{topic}</strong></p>
               <button onClick={handleEnd} style={{
                 background: "linear-gradient(90deg, #ef4444, #b91c1c)", color: "white",
                 border: "none", padding: "10px 20px",
@@ -257,13 +244,13 @@ function Debate() {
 
             {/* Messages */}
             <div style={{
-              background: "var(--input-bg)", border: "1px solid var(--card-border)",
+              background: "rgba(15, 12, 41, 0.4)", border: "1px solid rgba(124,58,237,0.2)",
               borderRadius: "20px", padding: "20px",
               height: "400px", overflowY: "auto", marginBottom: "20px",
-              boxShadow: "inset 0 4px 20px rgba(0, 0, 0, 0.2)"
+              boxShadow: "inset 0 4px 20px rgba(0, 0, 0, 0.3)"
             }}>
               {messages.length === 0 && (
-                <p style={{ color: "var(--muted-text)", textAlign: "center", marginTop: "160px" }}>
+                <p style={{ color: "#7c5aaa", textAlign: "center", marginTop: "160px" }}>
                   Start the debate — make your first argument! 💬
                 </p>
               )}
@@ -275,12 +262,12 @@ function Debate() {
                   <div style={{
                     maxWidth: "75%", padding: "14px 20px",
                     borderRadius: msg.role === "user" ? "20px 20px 4px 20px" : "20px 20px 20px 4px",
-                    background: msg.role === "user" ? "linear-gradient(135deg, var(--primary-color), var(--secondary-color))" : "var(--card-bg)",
-                    border: msg.role === "user" ? "1px solid rgba(255, 255, 255, 0.15)" : "1px solid var(--card-border)",
-                    boxShadow: msg.role === "user" ? "0 10px 25px var(--card-shadow), 0 4px 10px var(--card-shadow)" : "0 10px 30px rgba(0, 0, 0, 0.1)",
+                    background: msg.role === "user" ? "linear-gradient(135deg, #7c3aed, #9d5cf6)" : "rgba(124,58,237,0.18)",
+                    border: msg.role === "user" ? "1px solid rgba(255, 255, 255, 0.1)" : "1px solid rgba(124, 58, 237, 0.3)",
+                    boxShadow: msg.role === "user" ? "0 10px 25px rgba(124, 58, 237, 0.4), 0 4px 10px rgba(157, 92, 246, 0.3)" : "0 10px 30px rgba(0, 0, 0, 0.15)",
                     fontSize: "14px", lineHeight: "1.6"
                   }}>
-                    <p style={{ color: msg.role === "user" ? "#e2d9f3" : "var(--secondary-color)", fontSize: "11px", marginBottom: "6px", fontWeight: "bold" }}>
+                    <p style={{ color: msg.role === "user" ? "#e2d9f3" : "#a78bfa", fontSize: "11px", marginBottom: "6px", fontWeight: "bold" }}>
                       {msg.role === "user" ? "👤 You" : "🤖 AI"}
                     </p>
                     {msg.content}
@@ -291,8 +278,8 @@ function Debate() {
                 <div style={{ display: "flex", justifyContent: "flex-start", marginBottom: "16px" }}>
                   <div style={{
                     padding: "12px 16px", borderRadius: "16px",
-                    background: "var(--card-bg)", border: "1px solid var(--card-border)",
-                    animation: "pulse 1s infinite", color: "var(--muted-text)"
+                    background: "rgba(124,58,237,0.2)", border: "1px solid #7c3aed44",
+                    animation: "pulse 1s infinite"
                   }}>🤖 AI is thinking...</div>
                 </div>
               )}
@@ -308,16 +295,16 @@ function Debate() {
                 onKeyPress={e => e.key === "Enter" && handleSend()}
                 style={{
                   flex: 1, padding: "14px 16px",
-                  background: "var(--input-bg)",
-                  border: "1px solid var(--input-border)", borderRadius: "12px",
-                  color: "var(--input-text)", fontSize: "15px"
+                  background: "rgba(255,255,255,0.05)",
+                  border: "1px solid #7c3aed44", borderRadius: "12px",
+                  color: "white", fontSize: "15px"
                 }}
               />
               <button
                 onClick={handleSend}
                 disabled={loading}
                 style={{
-                  background: "linear-gradient(90deg, var(--primary-color), var(--secondary-color))",
+                  background: "linear-gradient(90deg, #7c3aed, #9d5cf6)",
                   color: "white", border: "none",
                   padding: "14px 24px", borderRadius: "12px",
                   cursor: "pointer", fontWeight: "bold", fontSize: "16px"
@@ -329,30 +316,29 @@ function Debate() {
         {/* Result */}
         {ended && (
           <div style={{
-            background: "var(--card-bg)", border: "1px solid var(--primary-color)",
+            background: "rgba(124,58,237,0.15)", border: "1px solid #7c3aed",
             borderRadius: "24px", padding: "40px", textAlign: "center",
-            animation: "slideIn 0.6s ease",
-            boxShadow: "0 15px 40px var(--card-shadow)"
+            animation: "slideIn 0.6s ease"
           }}>
             <div style={{ fontSize: "60px", marginBottom: "16px" }}>
               {score > 70 ? "🏆" : score > 40 ? "👍" : "📚"}
             </div>
-            <h2 style={{ fontSize: "32px", fontWeight: "900", marginBottom: "8px", color: "var(--text-color)" }}>
-              Debate <span style={{ color: "var(--secondary-color)" }}>Complete!</span>
+            <h2 style={{ fontSize: "32px", fontWeight: "900", marginBottom: "8px" }}>
+              Debate <span style={{ color: "#a78bfa" }}>Complete!</span>
             </h2>
             <div style={{
-              fontSize: "64px", fontWeight: "900", color: "var(--secondary-color)",
-              textShadow: "0 0 30px var(--primary-color)", margin: "20px 0"
+              fontSize: "64px", fontWeight: "900", color: "#a78bfa",
+              textShadow: "0 0 30px #7c3aed", margin: "20px 0"
             }}>{score}<span style={{ fontSize: "24px" }}>/100</span></div>
-            <p style={{ color: "var(--muted-text)", fontSize: "18px", marginBottom: "32px" }}>{feedback}</p>
+            <p style={{ color: "#c4b5fd", fontSize: "18px", marginBottom: "32px" }}>{feedback}</p>
             <button
               onClick={() => { setStarted(false); setEnded(false); setTopic(""); setMessages([]); setScore(null); }}
               style={{
-                background: "linear-gradient(90deg, var(--primary-color), var(--secondary-color))",
+                background: "linear-gradient(90deg, #7c3aed, #9d5cf6)",
                 color: "white", border: "none", padding: "16px 40px",
                 borderRadius: "30px", fontSize: "16px",
                 cursor: "pointer", fontWeight: "bold",
-                boxShadow: "0 0 30px var(--card-shadow)"
+                boxShadow: "0 0 30px #7c3aed88"
               }}>
               New Debate 🚀
             </button>

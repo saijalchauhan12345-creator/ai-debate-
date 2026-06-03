@@ -27,6 +27,12 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
+This project is configured for Netlify deployment using the root `netlify.toml` file.
+For production API calls, the frontend reads `REACT_APP_API` if it is set, otherwise it uses `/api`.
+
+- Local development: CRA proxy forwards API calls to `http://localhost:5000`
+- Production: set `REACT_APP_API=https://your-backend.example.com` in Netlify environment variables
+
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### `npm run eject`

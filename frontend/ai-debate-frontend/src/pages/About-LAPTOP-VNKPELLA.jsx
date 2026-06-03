@@ -22,8 +22,8 @@ function About() {
   return (
     <div style={{
       minHeight: "100vh",
-      background: "linear-gradient(135deg, #0f0c29, #302b63, #24243e)",
-      color: "white",
+      background: "var(--bg-gradient)",
+      color: "var(--text-color)",
       fontFamily: "sans-serif",
       overflow: "hidden",
       position: "relative"
@@ -34,7 +34,7 @@ function About() {
         @keyframes slideInRight { from { opacity: 0; transform: translateX(80px); } to { opacity: 1; transform: translateX(0); } }
         @keyframes slideInUp { from { opacity: 0; transform: translateY(60px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes floatCard { 0% { transform: translateY(0px); } 50% { transform: translateY(-12px); } 100% { transform: translateY(0px); } }
-        @keyframes glowPulse { 0% { box-shadow: 0 0 20px #7c3aed44; } 50% { box-shadow: 0 0 40px #7c3aed99; } 100% { box-shadow: 0 0 20px #7c3aed44; } }
+        @keyframes glowPulse { 0% { box-shadow: 0 0 20px var(--primary-color)33; } 50% { box-shadow: 0 0 40px var(--primary-color)77; } 100% { box-shadow: 0 0 20px var(--primary-color)33; } }
         @keyframes floatOrb { from { transform: translateY(0px) scale(1); } to { transform: translateY(-40px) scale(1.1); } }
       `}</style>
 
@@ -43,7 +43,8 @@ function About() {
         <div key={i} style={{
           position: "absolute",
           borderRadius: "50%",
-          background: `radial-gradient(circle, #7c3aed66, transparent)`,
+          background: `radial-gradient(circle, var(--primary-color), transparent)`,
+          opacity: "var(--orb-opacity)",
           width: `${60 + i * 30}px`,
           height: `${60 + i * 30}px`,
           top: `${15 + i * 15}%`,
@@ -58,9 +59,10 @@ function About() {
 
         {/* Sliding Title */}
         <p style={{
-          color: "#a78bfa",
+          color: "var(--secondary-color)",
           letterSpacing: "4px",
           fontSize: "14px",
+          fontWeight: "600",
           animation: "slideInLeft 0.8s ease forwards"
         }}>ABOUT US</p>
 
@@ -69,13 +71,13 @@ function About() {
           fontWeight: "900",
           margin: "16px 0 24px",
           animation: "slideInRight 1s ease forwards",
-          textShadow: "0 0 40px #7c3aed, 0 0 80px #7c3aed55"
+          textShadow: "0 0 40px var(--primary-color), 0 0 80px var(--card-shadow)"
         }}>
-          About <span style={{color: "#a78bfa"}}>AI Debate</span>
+          About <span style={{color: "var(--secondary-color)"}}>AI Debate</span>
         </h1>
 
         <p style={{
-          color: "#c4b5fd",
+          color: "var(--muted-text)",
           fontSize: "17px",
           lineHeight: "1.9",
           marginBottom: "60px",
@@ -102,15 +104,15 @@ function About() {
               ref={el => cardsRef.current[i] = el}
               onMouseEnter={e => {
                 e.currentTarget.style.transform = "translateY(-20px) scale(1.05) rotateX(5deg)";
-                e.currentTarget.style.boxShadow = "0 20px 60px #7c3aed99";
+                e.currentTarget.style.boxShadow = "0 20px 60px var(--primary-color)88";
               }}
               onMouseLeave={e => {
                 e.currentTarget.style.transform = "translateY(0px) scale(1) rotateX(0deg)";
-                e.currentTarget.style.boxShadow = "0 8px 32px #7c3aed33";
+                e.currentTarget.style.boxShadow = "0 8px 32px var(--card-shadow)";
               }}
               style={{
-                background: "rgba(124,58,237,0.15)",
-                border: "1px solid #7c3aed88",
+                background: "var(--card-bg)",
+                border: "1px solid var(--card-border)",
                 borderRadius: "20px",
                 padding: "32px 24px",
                 textAlign: "center",
@@ -118,13 +120,13 @@ function About() {
                 transform: "translateY(60px) scale(0.9)",
                 transition: "transform 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease",
                 animation: `floatCard ${3 + i * 0.7}s ease-in-out ${i * 0.3}s infinite`,
-                boxShadow: "0 8px 32px #7c3aed33",
+                boxShadow: "0 8px 32px var(--card-shadow)",
                 backdropFilter: "blur(10px)",
                 perspective: "1000px"
               }}>
               <div style={{fontSize: "40px", marginBottom: "16px"}}>{card.icon}</div>
-              <h3 style={{color: "#a78bfa", marginBottom: "12px", fontSize: "18px"}}>{card.title}</h3>
-              <p style={{color: "#c4b5fd", fontSize: "14px", lineHeight: "1.6"}}>{card.desc}</p>
+              <h3 style={{color: "var(--secondary-color)", marginBottom: "12px", fontSize: "18px"}}>{card.title}</h3>
+              <p style={{color: "var(--muted-text)", fontSize: "14px", lineHeight: "1.6"}}>{card.desc}</p>
             </div>
           ))}
         </div>
@@ -144,14 +146,15 @@ function About() {
           ].map((stat, i) => (
             <div key={i} style={{
               textAlign: "center",
-              background: "rgba(124,58,237,0.1)",
-              border: "1px solid #7c3aed44",
+              background: "var(--card-bg)",
+              border: "1px solid var(--card-border)",
               borderRadius: "16px",
               padding: "24px",
+              boxShadow: "0 4px 15px var(--card-shadow)",
               animation: `glowPulse ${2 + i * 0.5}s ease-in-out infinite`
             }}>
-              <div style={{fontSize: "32px", fontWeight: "900", color: "#a78bfa"}}>{stat.num}</div>
-              <div style={{color: "#c4b5fd", fontSize: "13px", marginTop: "8px"}}>{stat.label}</div>
+              <div style={{fontSize: "32px", fontWeight: "900", color: "var(--secondary-color)"}}>{stat.num}</div>
+              <div style={{color: "var(--muted-text)", fontSize: "13px", marginTop: "8px"}}>{stat.label}</div>
             </div>
           ))}
         </div>

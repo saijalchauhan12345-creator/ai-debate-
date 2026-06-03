@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import Register from './pages/Register';
-import Login from './pages/Login';
-import Debate from './pages/Debate';
+import Navbar from './components/Navbar-LAPTOP-VNKPELLA';
+import Home from './pages/Home-LAPTOP-VNKPELLA';
+import About from './pages/About-LAPTOP-VNKPELLA';
+import Contact from './pages/Contact-LAPTOP-VNKPELLA';
+import Register from './pages/Register-LAPTOP-VNKPELLA';
+import Login from './pages/Login-LAPTOP-VNKPELLA';
+import Debate from './pages/Debate-LAPTOP-VNKPELLA';
 
 function App() {
   return (

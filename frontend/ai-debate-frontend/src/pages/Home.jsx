@@ -2,8 +2,8 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
-  const containerRef = useRef(null);
   const navigate = useNavigate();
+  const containerRef = useRef(null);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -19,23 +19,34 @@ function Home() {
   }, []);
 
   return (
-    <div className="home-hero">
+    <div style={{
+      minHeight: "100vh",
+      background: "linear-gradient(135deg, #0f0c29, #302b63, #24243e)",
+      color: "white",
+      fontFamily: "sans-serif",
+      overflow: "hidden",
+      position: "relative",
+      perspective: "1000px"
+    }}>
 
       {/* Floating Orbs */}
       {[...Array(8)].map((_, i) => (
-        <div key={i} style={{
-          position: "absolute",
-          borderRadius: "50%",
-          background: `radial-gradient(circle, var(--primary-color), transparent)`,
-          opacity: "var(--orb-opacity)",
-          width: `${80 + i * 40}px`,
-          height: `${80 + i * 40}px`,
-          top: `${10 + i * 12}%`,
-          left: `${5 + i * 13}%`,
-          animation: `float${i % 3} ${3 + i}s ease-in-out infinite alternate`,
-          filter: "blur(2px)",
-          pointerEvents: "none"
-        }}/>
+        <div
+          key={i}
+          className="orb"
+          style={{
+            position: "absolute",
+            borderRadius: "50%",
+            background: `radial-gradient(circle, #7c3aed88, transparent)`,
+            width: `${80 + i * 40}px`,
+            height: `${80 + i * 40}px`,
+            top: `${10 + i * 12}%`,
+            left: `${5 + i * 13}%`,
+            animation: `float${i % 3} ${3 + i}s ease-in-out infinite alternate`,
+            filter: "blur(2px)",
+            pointerEvents: "none"
+          }}
+        />
       ))}
 
       <style>{`
@@ -45,57 +56,112 @@ function Home() {
         @keyframes cardFloat { from { transform: translateY(0px); } to { transform: translateY(-10px); } }
       `}</style>
 
-      <div ref={containerRef} className="hero-content">
-        <p className="hero-subheading">WELCOME TO THE FUTURE</p>
+      {/* Main 3D Content */}
+      <div ref={containerRef} style={{
+        maxWidth: "900px",
+        margin: "0 auto",
+        padding: "80px 20px",
+        textAlign: "center",
+        transformStyle: "preserve-3d",
+        transition: "transform 0.1s ease-out"
+      }}>
 
-        <h1 className="hero-heading">
-          AI Debate <span style={{color: "var(--secondary-color)"}}>Arena</span>
+        <p style={{color: "#a78bfa", letterSpacing: "4px", fontSize: "14px", marginBottom: "16px", transform: "translateZ(40px)"}}>
+          WELCOME TO THE FUTURE
+        </p>
+
+        <h1 style={{
+          fontSize: "60px",
+          fontWeight: "900",
+          marginBottom: "24px",
+          lineHeight: "1.2",
+          transform: "translateZ(60px)",
+          textShadow: "0 0 40px #7c3aed, 0 0 80px #7c3aed55"
+        }}>
+          AI Debate <span style={{color: "#a78bfa"}}>Arena</span>
         </h1>
 
-        <p className="hero-description">
+        <p style={{
+          fontSize: "18px",
+          color: "#c4b5fd",
+          marginBottom: "40px",
+          lineHeight: "1.8",
+          transform: "translateZ(30px)"
+        }}>
           Practice debates with AI, improve your thinking,<br/>
           and challenge ideas in a structured way.
         </p>
 
-        <div className="hero-actions">
-          <button 
+        <div style={{display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap", transform: "translateZ(50px)"}}>
+          <button
+            style={{
+              background: "#7c3aed",
+              color: "white",
+              border: "none",
+              padding: "14px 36px",
+              borderRadius: "30px",
+              fontSize: "16px",
+              cursor: "pointer",
+              fontWeight: "bold",
+              boxShadow: "0 0 30px #7c3aed, 0 0 60px #7c3aed55",
+              transition: "transform 0.2s, box-shadow 0.2s"
+            }}
             onClick={() => navigate("/debate")}
-            className="hero-button primary"
-            onMouseEnter={e => e.target.style.transform = "scale(1.05)"}
+            onMouseEnter={e => e.target.style.transform = "scale(1.1)"}
             onMouseLeave={e => e.target.style.transform = "scale(1)"}
           >
             🚀 Start Debate
           </button>
-          <button 
+          <button
+            style={{
+              background: "transparent",
+              color: "#a78bfa",
+              border: "2px solid #7c3aed",
+              padding: "14px 36px",
+              borderRadius: "30px",
+              fontSize: "16px",
+              cursor: "pointer",
+              fontWeight: "bold",
+              transition: "transform 0.2s"
+            }}
             onClick={() => navigate("/about")}
-            className="hero-button secondary"
-            onMouseEnter={e => e.target.style.transform = "scale(1.05)"}
+            onMouseEnter={e => e.target.style.transform = "scale(1.1)"}
             onMouseLeave={e => e.target.style.transform = "scale(1)"}
           >
             Learn More
           </button>
         </div>
 
-        <div className="hero-cards">
+        {/* 3D Cards */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+          gap: "24px",
+          marginTop: "80px",
+          transform: "translateZ(20px)"
+        }}>
           {[
             {icon: "🧠", title: "Debate AI", desc: "Engage in structured debates with intelligent AI opponents"},
             {icon: "📈", title: "Improve Thinking", desc: "Sharpen your logic, reasoning and critical thinking skills"},
             {icon: "🎯", title: "Get Feedback", desc: "Understand your strengths and areas to improve"},
           ].map((card, i) => (
             <div key={i}
-              onMouseEnter={e => {
-                e.currentTarget.style.transform = "translateY(-15px) scale(1.05)";
-                e.currentTarget.style.boxShadow = "0 15px 40px var(--primary-color)44";
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.transform = "translateY(0px) scale(1)";
-                e.currentTarget.style.boxShadow = "0 8px 32px var(--card-shadow)";
-              }}
-              className="hero-card"
-            >
-              <div className="hero-card-icon">{card.icon}</div>
-              <h3 className="hero-card-title">{card.title}</h3>
-              <p className="hero-card-text">{card.desc}</p>
+              onMouseEnter={e => e.currentTarget.style.transform = "translateY(-15px) scale(1.05)"}
+              onMouseLeave={e => e.currentTarget.style.transform = "translateY(0px) scale(1)"}
+              style={{
+                background: "rgba(124,58,237,0.15)",
+                border: "1px solid #7c3aed88",
+                borderRadius: "16px",
+                padding: "32px 24px",
+                textAlign: "center",
+                animation: `cardFloat ${2 + i * 0.5}s ease-in-out infinite alternate`,
+                transition: "transform 0.3s ease, box-shadow 0.3s",
+                boxShadow: "0 8px 32px #7c3aed33",
+                backdropFilter: "blur(10px)"
+              }}>
+              <div style={{fontSize: "40px", marginBottom: "16px"}}>{card.icon}</div>
+              <h3 style={{color: "#a78bfa", marginBottom: "12px", fontSize: "18px"}}>{card.title}</h3>
+              <p style={{color: "#c4b5fd", fontSize: "14px", lineHeight: "1.6"}}>{card.desc}</p>
             </div>
           ))}
         </div>

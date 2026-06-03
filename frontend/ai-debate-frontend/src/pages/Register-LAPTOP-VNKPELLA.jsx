@@ -69,8 +69,8 @@ function Register() {
   return (
     <div style={{
       minHeight: "100vh",
-      background: "linear-gradient(135deg, #0f0c29, #302b63, #24243e)",
-      color: "white",
+      background: "var(--bg-gradient)",
+      color: "var(--text-color)",
       fontFamily: "sans-serif",
       overflowY: "auto",
       position: "relative"
@@ -80,10 +80,10 @@ function Register() {
         @keyframes slideInLeft { from { opacity: 0; transform: translateX(-80px); } to { opacity: 1; transform: translateX(0); } }
         @keyframes slideInRight { from { opacity: 0; transform: translateX(80px); } to { opacity: 1; transform: translateX(0); } }
         @keyframes floatOrb { from { transform: translateY(0px) scale(1); } to { transform: translateY(-40px) scale(1.1); } }
-        @keyframes glowPulse { 0% { box-shadow: 0 0 20px #7c3aed44; } 50% { box-shadow: 0 0 60px #7c3aed99; } 100% { box-shadow: 0 0 20px #7c3aed44; } }
+        @keyframes glowPulse { 0% { box-shadow: 0 0 20px var(--primary-color)33; } 50% { box-shadow: 0 0 60px var(--primary-color)77; } 100% { box-shadow: 0 0 20px var(--primary-color)33; } }
         @keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        input:focus { outline: none; border-color: #7c3aed !important; box-shadow: 0 0 20px #7c3aed55; }
-        input::placeholder { color: #7c5aaa; }
+        input:focus { outline: none; border-color: var(--primary-color) !important; box-shadow: 0 0 20px var(--primary-color)55; }
+        input::placeholder { color: var(--muted-text); opacity: 0.6; }
       `}</style>
 
       {/* Floating Orbs */}
@@ -91,7 +91,8 @@ function Register() {
         <div key={i} style={{
           position: "absolute",
           borderRadius: "50%",
-          background: `radial-gradient(circle, #7c3aed${40 + i * 10}, transparent)`,
+          background: `radial-gradient(circle, var(--primary-color), transparent)`,
+          opacity: "var(--orb-opacity)",
           width: `${50 + i * 30}px`,
           height: `${50 + i * 30}px`,
           top: `${8 + i * 13}%`,
@@ -110,7 +111,7 @@ function Register() {
         width: "200px",
         height: "200px",
         borderRadius: "50%",
-        border: "2px solid #7c3aed33",
+        border: "2px solid var(--card-border)",
         animation: "spinSlow 12s linear infinite",
         pointerEvents: "none"
       }}/>
@@ -121,7 +122,7 @@ function Register() {
         width: "150px",
         height: "150px",
         borderRadius: "50%",
-        border: "2px solid #7c3aed44",
+        border: "2px solid var(--card-border)",
         animation: "spinSlow 8s linear infinite reverse",
         pointerEvents: "none"
       }}/>
@@ -137,13 +138,13 @@ function Register() {
           marginBottom: "40px"
         }}>
           <div style={{fontSize: "50px", marginBottom: "12px"}}>⚡</div>
-          <p style={{color: "#a78bfa", letterSpacing: "4px", fontSize: "13px", marginBottom: "10px"}}>JOIN THE ARENA</p>
+          <p style={{color: "var(--secondary-color)", letterSpacing: "4px", fontSize: "13px", marginBottom: "10px", fontWeight: "600"}}>JOIN THE ARENA</p>
           <h1 style={{
             fontSize: "42px",
             fontWeight: "900",
-            textShadow: "0 0 40px #7c3aed, 0 0 80px #7c3aed55"
+            textShadow: "0 0 40px var(--primary-color), 0 0 80px var(--card-shadow)"
           }}>
-            Create <span style={{color: "#a78bfa"}}>Account</span>
+            Create <span style={{color: "var(--secondary-color)"}}>Account</span>
           </h1>
         </div>
 
@@ -151,8 +152,8 @@ function Register() {
         <div
           ref={formRef}
           style={{
-            background: "rgba(124,58,237,0.12)",
-            border: "1px solid #7c3aed77",
+            background: "var(--card-bg)",
+            border: "1px solid var(--card-border)",
             borderRadius: "24px",
             padding: "40px",
             opacity: "0",
@@ -171,7 +172,8 @@ function Register() {
                 padding: "10px", 
                 borderRadius: "8px", 
                 marginBottom: "20px",
-                textAlign: "center"
+                textAlign: "center",
+                fontWeight: "bold"
               }}>
                 {error}
               </div>
@@ -185,11 +187,12 @@ function Register() {
             ].map((field, i) => (
               <div key={i} style={{marginBottom: "20px", animation: `slideInLeft ${0.6 + i * 0.15}s ease forwards`}}>
                 <label style={{
-                  color: "#a78bfa",
+                  color: "var(--secondary-color)",
                   fontSize: "11px",
                   letterSpacing: "2px",
                   display: "block",
-                  marginBottom: "8px"
+                  marginBottom: "8px",
+                  fontWeight: "600"
                 }}>{field.label}</label>
                 <input
                   type={field.type}
@@ -197,13 +200,14 @@ function Register() {
                   value={formData[field.name]}
                   onChange={handleChange}
                   placeholder={field.placeholder}
+                  required
                   style={{
                     width: "100%",
                     padding: "14px 16px",
-                    background: "rgba(255,255,255,0.05)",
-                    border: "1px solid #7c3aed44",
+                    background: "var(--input-bg)",
+                    border: "1px solid var(--input-border)",
                     borderRadius: "12px",
-                    color: "white",
+                    color: "var(--input-text)",
                     fontSize: "15px",
                     boxSizing: "border-box",
                     transition: "border-color 0.3s, box-shadow 0.3s"
@@ -218,18 +222,18 @@ function Register() {
               onMouseEnter={e => {
                 if (!loading) {
                   e.target.style.transform = "translateY(-4px) scale(1.03)";
-                  e.target.style.boxShadow = "0 0 60px #7c3aed";
+                  e.target.style.boxShadow = "0 0 60px var(--primary-color)";
                 }
               }}
               onMouseLeave={e => {
                 if (!loading) {
                   e.target.style.transform = "translateY(0px) scale(1)";
-                  e.target.style.boxShadow = "0 0 30px #7c3aed88";
+                  e.target.style.boxShadow = "0 0 30px var(--card-shadow)";
                 }
               }}
               style={{
                 width: "100%",
-                background: "linear-gradient(90deg, #7c3aed, #9d5cf6)",
+                background: "linear-gradient(90deg, var(--primary-color), var(--secondary-color))",
                 color: "white",
                 border: "none",
                 padding: "16px",
@@ -238,7 +242,7 @@ function Register() {
                 cursor: loading ? "not-allowed" : "pointer",
                 fontWeight: "bold",
                 marginTop: "12px",
-                boxShadow: "0 0 30px #7c3aed88",
+                boxShadow: "0 0 30px var(--card-shadow)",
                 transition: "transform 0.3s ease, box-shadow 0.3s ease",
                 opacity: loading ? 0.7 : 1
               }}>
@@ -248,14 +252,14 @@ function Register() {
 
           <p style={{
             textAlign: "center",
-            color: "#7c5aaa",
+            color: "var(--muted-text)",
             fontSize: "14px",
             marginTop: "20px"
           }}>
             Already have an account?{" "}
             <span 
               onClick={() => navigate("/login")}
-              style={{color: "#a78bfa", cursor: "pointer", textDecoration: "underline"}}>
+              style={{color: "var(--secondary-color)", cursor: "pointer", textDecoration: "underline", fontWeight: "600"}}>
               Login here
             </span>
           </p>

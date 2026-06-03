@@ -1,4 +1,4 @@
-const API = '/api';
+const API = process.env.REACT_APP_API || '/api';
 
 export const registerUser = async (name, email, password) => {
   const res = await fetch(`${API}/auth/register`, {
@@ -38,6 +38,13 @@ export const sendMessage = async (debateId, message, token) => {
 
 export const getHistory = async (token) => {
   const res = await fetch(`${API}/debate/history`, {
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+  return res.json();
+};
+
+export const getDebate = async (debateId, token) => {
+  const res = await fetch(`${API}/debate/${debateId}`, {
     headers: { 'Authorization': `Bearer ${token}` }
   });
   return res.json();
