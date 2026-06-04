@@ -17,6 +17,11 @@ function Debate() {
   const [selectedDebate, setSelectedDebate] = useState(null);
   const messagesEndRef = useRef(null);
 
+  const liveScore = Math.min(100, messages.filter(msg => msg.role === "user").length * 10 + 20);
+  const currentScore = ended ? score : liveScore;
+  const scoreLabel = ended ? "Final Score" : "Live Score";
+  const scoreProgress = Math.max(0, Math.min(100, currentScore ?? 0));
+
   useEffect(() => {
     const u = JSON.parse(localStorage.getItem("user"));
     const token = localStorage.getItem("token");
@@ -342,6 +347,41 @@ function Debate() {
               }}
               onMouseEnter={e => e.target.style.transform = "scale(1.05)"}
               onMouseLeave={e => e.target.style.transform = "scale(1)"}>End Debate</button>
+            </div>
+
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "16px",
+              marginBottom: "22px"
+            }}>
+              <div style={{
+                background: "linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(99, 102, 241, 0.12))",
+                border: "1px solid rgba(124, 58, 237, 0.2)", borderRadius: "18px",
+                padding: "18px 20px"
+              }}>
+                <p style={{ margin: 0, color: "var(--muted-text)", fontSize: "13px", fontWeight: "700" }}>{scoreLabel}</p>
+                <div style={{ display: "flex", alignItems: "flex-end", gap: "10px", marginTop: "10px" }}>
+                  <span style={{ fontSize: "36px", fontWeight: "900", color: "var(--secondary-color)" }}>{currentScore ?? "—"}</span>
+                  <span style={{ color: "var(--text-color)", fontSize: "16px" }}>/100</span>
+                </div>
+                <div style={{ height: "8px", width: "100%", background: "rgba(255,255,255,0.16)", borderRadius: "999px", marginTop: "14px" }}>
+                  <div style={{ height: "100%", width: `${scoreProgress}%`, background: "linear-gradient(90deg, var(--primary-color), var(--secondary-color))", borderRadius: "999px" }} />
+                </div>
+                <p style={{ margin: "12px 0 0", fontSize: "13px", color: "var(--muted-text)" }}>
+                  {ended ? "Final debate score based on completed arguments." : "Live scoring updates as you add arguments."}
+                </p>
+              </div>
+              <div style={{
+                background: "var(--input-bg)", border: "1px solid var(--card-border)", borderRadius: "18px",
+                padding: "18px 20px"
+              }}>
+                <p style={{ margin: 0, color: "var(--muted-text)", fontSize: "13px", fontWeight: "700" }}>Arguments</p>
+                <p style={{ margin: "10px 0 0", fontSize: "26px", fontWeight: "800", color: "var(--secondary-color)" }}>{messages.filter(msg => msg.role === "user").length}</p>
+                <p style={{ margin: "8px 0 0", fontSize: "13px", color: "var(--muted-text)" }}>
+                  Each message adds debate strength and improves your final score.
+                </p>
+              </div>
             </div>
 
             {/* Messages */}
